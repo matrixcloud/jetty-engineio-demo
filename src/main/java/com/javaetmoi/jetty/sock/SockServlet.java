@@ -11,6 +11,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -49,11 +50,18 @@ public class SockServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        mEngineIoServer.handleRequest(req, resp);
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        mEngineIoServer.handleRequest(new HttpServletRequestWrapper(req) {
+            @Override
+            public boolean isAsyncSupported() {
+                return false;
+            }
+        }, resp);
     }
 
+
     public EngineIoServer getmEngineIoServer() {
+        LOGGER.info("getmEngineIoServer");
          return mEngineIoServer;
     }
 }

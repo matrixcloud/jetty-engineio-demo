@@ -14,19 +14,22 @@
         <url-pattern>/HelloWorld</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>SockServlet</servlet-name>
-        <servlet-class>com.javaetmoi.jetty.sock.SockServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>SockServlet</servlet-name>-->
+        <!--<servlet-class>com.javaetmoi.jetty.sock.SockServlet</servlet-class>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>SockServlet</servlet-name>
-        <url-pattern>/sock/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>SockServlet</servlet-name>-->
+        <!--<url-pattern>/sock/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-
+    
+    <listener>
+        <listener-class>com.javaetmoi.jetty.StartupListener</listener-class>
+    </listener>
 </web-app>

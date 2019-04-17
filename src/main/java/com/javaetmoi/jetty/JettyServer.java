@@ -1,10 +1,15 @@
 package com.javaetmoi.jetty;
 
+import com.javaetmoi.jetty.sock.SockServlet;
+import io.socket.engineio.server.JettyWebSocketHandler;
+import org.eclipse.jetty.http.pathmap.ServletPathSpec;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletException;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.InetAddress;
@@ -99,6 +104,17 @@ public class JettyServer {
         }
         root.setResourceBase(webAppDir.toURI().toString());
         root.setParentLoaderPriority(true);
+
+//        WebSocketUpgradeFilter filter = WebSocketUpgradeFilter.configureContext(root);
+//        filter.addMapping(new ServletPathSpec("/sock/*"), ((servletUpgradeRequest, servletUpgradeResponse) -> {
+//            SockServlet sockServlet = null;
+//            try {
+//                sockServlet = (SockServlet) root.getServletContext().getServlet("SockServlet");
+//            } catch (ServletException e) {
+//                e.printStackTrace();
+//            }
+//            return new JettyWebSocketHandler(sockServlet.getmEngineIoServer());
+//        }));
 
         server.setHandler(root);
 
