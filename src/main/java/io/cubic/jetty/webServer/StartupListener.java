@@ -1,6 +1,5 @@
-package io.cubic.jetty;
+package io.cubic.jetty.webServer.sock;
 
-import io.cubic.jetty.sock.SockServlet;
 import io.socket.engineio.server.JettyWebSocketHandler;
 import org.eclipse.jetty.http.pathmap.ServletPathSpec;
 import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;

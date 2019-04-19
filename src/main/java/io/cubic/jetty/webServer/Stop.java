@@ -1,4 +1,4 @@
-package io.cubic.jetty;
+package io.cubic.jetty.webServer.sock;
 
 public class Stop {
 
