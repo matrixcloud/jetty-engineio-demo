@@ -1,4 +1,4 @@
-package io.cubic.jetty.webServer.sock;
+package io.cubic.jetty.webServer.servlet;
 
 import io.socket.emitter.Emitter;
 import io.socket.engineio.parser.Packet;
@@ -54,7 +54,7 @@ public class SockServlet extends HttpServlet {
         mEngineIoServer.handleRequest(new HttpServletRequestWrapper(req) {
             @Override
             public boolean isAsyncSupported() {
-                return false;
+                return true;
             }
         }, resp);
         mEngineIoServer.handleRequest(req, resp);

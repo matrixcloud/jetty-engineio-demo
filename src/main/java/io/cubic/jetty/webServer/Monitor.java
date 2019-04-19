@@ -1,4 +1,4 @@
-package io.cubic.jetty.webServer.sock;
+package io.cubic.jetty.webServer;
 
 import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package io.cubic.jetty.webServer.sock;
+package io.cubic.jetty.webServer.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,5 +1,6 @@
-package io.cubic.jetty.webServer.sock;
+package io.cubic.jetty.webServer;
 
+import io.cubic.jetty.webServer.servlet.SockServlet;
 import io.socket.engineio.server.JettyWebSocketHandler;
 import org.eclipse.jetty.http.pathmap.ServletPathSpec;
 import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
@@ -27,7 +28,7 @@ public class StartupListener implements ServletContextListener {
 
             WebSocketUpgradeFilter filter = WebSocketUpgradeFilter.configureContext(context);
             filter.addMapping(new ServletPathSpec("/sock/*"), ((servletUpgradeRequest, servletUpgradeResponse) -> new JettyWebSocketHandler(sockServlet.getmEngineIoServer())));
-        } catch (ServletException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

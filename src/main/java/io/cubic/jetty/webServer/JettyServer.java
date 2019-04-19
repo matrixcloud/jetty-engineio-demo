@@ -1,4 +1,4 @@
-package io.cubic.jetty.webServer.sock;
+package io.cubic.jetty.webServer;
 
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
