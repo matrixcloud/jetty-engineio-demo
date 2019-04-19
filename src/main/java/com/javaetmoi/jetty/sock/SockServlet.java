@@ -57,11 +57,12 @@ public class SockServlet extends HttpServlet {
                 return false;
             }
         }, resp);
+        mEngineIoServer.handleRequest(req, resp);
     }
 
 
     public EngineIoServer getmEngineIoServer() {
         LOGGER.info("getmEngineIoServer");
-         return mEngineIoServer;
+        return mEngineIoServer;
     }
 }

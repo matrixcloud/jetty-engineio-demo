@@ -60,7 +60,9 @@
         <!-- Version of third libraries -->
         <version.javax-servlet>3.1.0</version.javax-servlet>
         <!--<version.jetty>9.4.15.v20190215</version.jetty>-->
-        <version.jetty>9.4.14.v20181114</version.jetty>
+        <!--<version.jetty>9.4.14.v20181114</version.jetty>-->
+        <!-- ucmdb jetty version -->
+        <version.jetty>9.4.8.v20180619</version.jetty>
         <version.logback>1.1.2</version.logback>
         <version.slf4j>1.7.7</version.slf4j>
 
@@ -82,7 +84,6 @@
     </properties>
 
     <dependencies>
-
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>

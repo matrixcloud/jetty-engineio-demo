@@ -1,4 +1,4 @@
-package com.javaetmoi.jetty.singleServer;
+package sock;
 
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.JettyWebSocketHandler;
@@ -15,12 +15,11 @@ import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-final class ServerWrapper {
+final class LongPollingOk {
 
     private static final AtomicInteger PORT_START = new AtomicInteger(3000);
 
@@ -32,16 +31,15 @@ final class ServerWrapper {
         Log.setLog(new JettyNoLogging());
     }
 
-    ServerWrapper() {
+    LongPollingOk() {
         mPort = PORT_START.getAndIncrement();
-        mServer = new Server(mPort);
+        mServer = new Server(8081);
         mEngineIoServer = new EngineIoServer();
 
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.setContextPath("/");
+        servletContextHandler.setContextPath("/rest-api");
 
         servletContextHandler.addServlet(new ServletHolder(new HttpServlet() {
-
             @Override
             public void init() throws ServletException {
                 super.init();
@@ -50,19 +48,13 @@ final class ServerWrapper {
 
             @Override
             protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-                mEngineIoServer.handleRequest(new HttpServletRequestWrapper(request) {
-                    @Override
-                    public boolean isAsyncSupported() {
-                        return false;
-                    }
-                }, response);
+                mEngineIoServer.handleRequest(request, response);
             }
-        }), "/engine.io/*");
-
+        }), "/sock/*");
         try {
             WebSocketUpgradeFilter webSocketUpgradeFilter = WebSocketUpgradeFilter.configureContext(servletContextHandler);
             webSocketUpgradeFilter.addMapping(
-                    new ServletPathSpec("/engine.io/*"),
+                    new ServletPathSpec("/sock/*"),
                     (servletUpgradeRequest, servletUpgradeResponse) -> new JettyWebSocketHandler(mEngineIoServer));
         } catch (ServletException ex) {
             ex.printStackTrace();
@@ -151,6 +143,14 @@ final class ServerWrapper {
 
         @Override
         public void ignore(Throwable throwable) {
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new sock.LongPollingOk().startServer();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

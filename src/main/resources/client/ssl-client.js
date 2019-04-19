@@ -2,10 +2,11 @@ var engine = require('engine.io-client');
 
 const opts = {
     path:  '/rest-api/sock',
+    rejectUnauthorized: false,
     transports: ['polling'],
     upgrade: false
 }
-const socket = engine('http://localhost:8081', opts);
+const socket = engine('https://localhost:8082', opts);
 socket.on('open', function () {
     var echoMessage = "Hi Server, I am client";
     socket.on('message', function (message) {
