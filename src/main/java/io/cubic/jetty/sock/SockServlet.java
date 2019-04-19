@@ -1,4 +1,4 @@
-package com.javaetmoi.jetty.sock;
+package io.cubic.jetty.sock;
 
 import io.socket.emitter.Emitter;
 import io.socket.engineio.parser.Packet;

@@ -1,4 +1,4 @@
-package com.javaetmoi.jetty;
+package io.cubic.jetty;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

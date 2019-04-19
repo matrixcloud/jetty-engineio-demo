@@ -216,7 +216,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.javaetmoi.jetty.JettyServer</mainClass>
+                            <mainClass>io.cubic.jetty.JettyServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -231,7 +231,7 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${version.plugin.exec-maven-plugin}</version>
                     <configuration>
-                        <mainClass>com.javaetmoi.jetty.JettyServer</mainClass>
+                        <mainClass>io.cubic.jetty.JettyServer</mainClass>
                     </configuration>
                 </plugin>
             </plugins>
@@ -366,12 +366,12 @@
                             <programs>
                                 <program>
                                     <id>start</id>
-                                    <mainClass>com.javaetmoi.jetty.JettyServer</mainClass>
+                                    <mainClass>io.cubic.jetty.JettyServer</mainClass>
                                     <name>start</name>
                                 </program>
                                 <program>
                                     <id>stop</id>
-                                    <mainClass>com.javaetmoi.jetty.Stop</mainClass>
+                                    <mainClass>io.cubic.jetty.Stop</mainClass>
                                     <name>stop</name>
                                 </program>
                             </programs>
@@ -397,7 +397,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.javaetmoi.jetty.JettyServer</mainClass>
+                                    <mainClass>io.cubic.jetty.JettyServer</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>

@@ -1,4 +1,4 @@
-package com.javaetmoi.jetty.singleServer;
+package io.cubic.jetty.singleServer;
 
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.JettyWebSocketHandler;
@@ -15,12 +15,11 @@ import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-final class LongPollingNotOk {
+final class LongPollingOk {
 
     private static final AtomicInteger PORT_START = new AtomicInteger(3000);
 
@@ -32,7 +31,7 @@ final class LongPollingNotOk {
         Log.setLog(new JettyNoLogging());
     }
 
-    LongPollingNotOk() {
+    LongPollingOk() {
         mPort = PORT_START.getAndIncrement();
         mServer = new Server(8081);
         mEngineIoServer = new EngineIoServer();
@@ -41,7 +40,6 @@ final class LongPollingNotOk {
         servletContextHandler.setContextPath("/rest-api");
 
         servletContextHandler.addServlet(new ServletHolder(new HttpServlet() {
-
             @Override
             public void init() throws ServletException {
                 super.init();
@@ -50,15 +48,9 @@ final class LongPollingNotOk {
 
             @Override
             protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-                mEngineIoServer.handleRequest(new HttpServletRequestWrapper(request) {
-                    @Override
-                    public boolean isAsyncSupported() {
-                        return false; // if you want the long-polling to make a effect, you need let it return true
-                    }
-                }, response);
+                mEngineIoServer.handleRequest(request, response);
             }
         }), "/sock/*");
-
         try {
             WebSocketUpgradeFilter webSocketUpgradeFilter = WebSocketUpgradeFilter.configureContext(servletContextHandler);
             webSocketUpgradeFilter.addMapping(
@@ -154,7 +146,11 @@ final class LongPollingNotOk {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new LongPollingNotOk().startServer();
+    public static void main(String[] args) {
+        try {
+            new LongPollingOk().startServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

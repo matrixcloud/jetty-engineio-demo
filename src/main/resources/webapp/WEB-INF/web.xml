@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>com.javaetmoi.jetty.HelloWorldServlet</servlet-class>
+        <servlet-class>io.cubic.jetty.HelloWorldServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -30,6 +30,6 @@
     </welcome-file-list>
     
     <listener>
-        <listener-class>com.javaetmoi.jetty.StartupListener</listener-class>
+        <listener-class>io.cubic.jetty.StartupListener</listener-class>
     </listener>
 </web-app>
